@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ClassLibrary;
 
 namespace AcmeLanding.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class Acme_CorporationContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public Acme_CorporationContext(DbContextOptions<Acme_CorporationContext> options)
             : base(options)
         {
         }
+        public DbSet<ClassLibrary.Submission_Model> Submission_Model { get; set; }
     }
 }
