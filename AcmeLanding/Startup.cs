@@ -31,9 +31,11 @@ namespace AcmeLanding
                 options.UseSqlServer(
                     Configuration.GetConnectionString("Acme_CorporationContext")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //   .AddRoleStore<IdentityRole>()
                 .AddEntityFrameworkStores<Acme_CorporationContext>();
-            services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
