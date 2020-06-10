@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AcmeLanding
 {
-    public class Program
+    public class Program 
     {
         public static async Task Main(string[] args)
         {
