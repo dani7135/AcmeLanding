@@ -1,12 +1,10 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
 namespace ClassLibrary
 {
     public class Submission_Model { 
      public int Id { get; set; }
-
+        
     // [Range(18, 102, ErrorMessage = "Must be older than 18 to submit")]
     [Required]
     [DisplayName("Current age")]

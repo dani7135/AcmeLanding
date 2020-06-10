@@ -12,9 +12,9 @@ namespace AcmeLanding.Controllers
 {
     public class SubmissionsController : Controller
     {
-        private readonly Acme_CorporationContext _context;
+        private readonly Data.Acme_CorporationContext _context;
 
-        public SubmissionsController(Acme_CorporationContext context)
+        public SubmissionsController(Data.Acme_CorporationContext context)
         {
             _context = context;
         }
