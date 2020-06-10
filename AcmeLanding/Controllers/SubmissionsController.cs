@@ -7,39 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AcmeLanding.Data;
 using ClassLibrary;
-using AcmeLanding.Services;
-using System.ComponentModel.DataAnnotations;
 
 namespace AcmeLanding.Controllers
 {
-    public class SubmissionsController : Controller
+    public class Submission_ModelController : Controller
     {
         private readonly Data.Acme_CorporationContext _context;
-        private readonly IAgeValidate _age;
 
-        public int Min { get;  set; }
-        public int Max { get;  set; }
-
-
-        //    private readonly SerialNumberValidate _serial;
-        //  private readonly AgeValidate _age;
-
-
-        public SubmissionsController(Data.Acme_CorporationContext context, SerialNumberValidate number, AgeValidate validate, IAgeValidate validatedAge)
+        public Submission_ModelController(Data.Acme_CorporationContext context)
         {
             _context = context;
-            /* _serial = number;
-             _age = validate;*/
-          //  _age = validatedAge; Tæt på denne virker
         }
 
-        // GET: Submissions
+        // GET: Submission_Model
         public async Task<IActionResult> Index()
         {
             return View(await _context.Submission_Model.ToListAsync());
         }
 
-        // GET: Submissions/Details/5
+        // GET: Submission_Model/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -57,54 +43,29 @@ namespace AcmeLanding.Controllers
             return View(submission_Model);
         }
 
-        // GET: Submissions/Create
+        // GET: Submission_Model/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Submissions/Create
+        // POST: Submission_Model/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Age,FirstName,LastName,Email,SerialNumber")] Submission_Model submission_Model)
         {
-            //var ages = _age.IsValid(access);
-           
-
             if (ModelState.IsValid)
             {
-                //Tæt på den øvserte bool virker.
-                /*bool ageVail = _age.IsValid(Min, Max);
-                if (ageVail == false)
-                {  
-                    return RedirectToAction(nameof(Create));
-                }
-
-                /*   var v = _serial.SerialNumberVali(number);
-                if (v == false)
-                {
-                    return RedirectToAction(nameof(Create));
-
-                    //ModelState.AddModelError(string.Empty, "This code is not valid");
-
-                }
-                //   ValidationResult ages = age.IsValid(submission_Model);
-                /* if (ages == false)
-                 {
-                 }*/
-
-
                 _context.Add(submission_Model);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
             return View(submission_Model);
         }
 
-        // GET: Submissions/Edit/5
+        // GET: Submission_Model/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -120,7 +81,7 @@ namespace AcmeLanding.Controllers
             return View(submission_Model);
         }
 
-        // POST: Submissions/Edit/5
+        // POST: Submission_Model/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -155,7 +116,7 @@ namespace AcmeLanding.Controllers
             return View(submission_Model);
         }
 
-        // GET: Submissions/Delete/5
+        // GET: Submission_Model/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -173,7 +134,7 @@ namespace AcmeLanding.Controllers
             return View(submission_Model);
         }
 
-        // POST: Submissions/Delete/5
+        // POST: Submission_Model/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

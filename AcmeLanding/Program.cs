@@ -10,7 +10,7 @@ namespace AcmeLanding
 {
     public class Program 
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             //Det gamle
             CreateHostBuilder(args).Build().Run();
