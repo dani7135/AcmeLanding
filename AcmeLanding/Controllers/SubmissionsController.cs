@@ -10,22 +10,22 @@ using ClassLibrary;
 
 namespace AcmeLanding.Controllers
 {
-    public class Submission_ModelController : Controller
+    public class SubmissionsController : Controller
     {
         private readonly Data.Acme_CorporationContext _context;
 
-        public Submission_ModelController(Data.Acme_CorporationContext context)
+        public SubmissionsController(Data.Acme_CorporationContext context)
         {
             _context = context;
         }
 
-        // GET: Submission_Model
+        // GET: Submissions
         public async Task<IActionResult> Index()
         {
             return View(await _context.Submission_Model.ToListAsync());
         }
 
-        // GET: Submission_Model/Details/5
+        // GET: Submissions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,13 +43,13 @@ namespace AcmeLanding.Controllers
             return View(submission_Model);
         }
 
-        // GET: Submission_Model/Create
+        // GET: Submissions/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Submission_Model/Create
+        // POST: Submissions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +65,7 @@ namespace AcmeLanding.Controllers
             return View(submission_Model);
         }
 
-        // GET: Submission_Model/Edit/5
+        // GET: Submissions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace AcmeLanding.Controllers
             return View(submission_Model);
         }
 
-        // POST: Submission_Model/Edit/5
+        // POST: Submissions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace AcmeLanding.Controllers
             return View(submission_Model);
         }
 
-        // GET: Submission_Model/Delete/5
+        // GET: Submissions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace AcmeLanding.Controllers
             return View(submission_Model);
         }
 
-        // POST: Submission_Model/Delete/5
+        // POST: Submissions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -21,5 +21,7 @@ namespace ClassLibrary
     [Range(10000000, 99999999, ErrorMessage = "Enter vaild 8 digits serial number")]
     [Display(Name = "Valid product serial number")]
     public int SerialNumber { get; set; }
+
+        public int Winner { get; set; }
     }
 }
