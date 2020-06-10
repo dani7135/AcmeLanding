@@ -77,9 +77,8 @@ namespace AcmeLanding.Controllers
             {
                 bool ageVail = _age.IsValid(Min, Max);
                 if (ageVail == false)
-                {
-                                        return RedirectToAction(nameof(Create));
-
+                {  
+                    return RedirectToAction(nameof(Create));
                 }
 
                 /*   var v = _serial.SerialNumberVali(number);
