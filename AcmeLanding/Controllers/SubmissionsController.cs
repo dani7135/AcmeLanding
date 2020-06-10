@@ -15,17 +15,16 @@ namespace AcmeLanding.Controllers
     {
         private readonly Data.Acme_CorporationContext _context;
         private readonly IAgeValidate _age;
-        static DataAccess da;
         
        
 
 
         //    private readonly SerialNumberValidate _serial;
-        AgeValidate age = new AgeValidate(da);
+        AgeValidate age = new AgeValidate();
         
 
 
-        public SubmissionsController(Data.Acme_CorporationContext context, SerialNumberValidate number, AgeValidate validate, IAgeValidate validatedAge)
+        public SubmissionsController(Data.Acme_CorporationContext context, IAgeValidate validatedAge)
         {
             _context = context;
             /* _serial = number;
@@ -71,10 +70,10 @@ namespace AcmeLanding.Controllers
         public async Task<IActionResult> Create([Bind("Id,Age,FirstName,LastName,Email,SerialNumber")] Submission_Model submission_Model)
         {
             //var ages = _age.IsValid(access);
-            bool ageVail = _age.IsValid(age.Min, age.Max);
+            bool ageVail = _age.IsValid(submission_Model.Age);
             if (ageVail == false)
             {
-                return RedirectToAction(nameof(Create));
+                ModelState.AddModelError(string.Empty, "This age is not valid. You have to be older then 18");
             }
 
             if (ModelState.IsValid)
@@ -88,18 +87,15 @@ namespace AcmeLanding.Controllers
 
                     //ModelState.AddModelError(string.Empty, "This code is not valid");
 
-                }
-                //   ValidationResult ages = age.IsValid(submission_Model);
-                /* if (ages == false)
-                 {
-                 }*/
+             }*/
 
 
                 _context.Add(submission_Model);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+                }
             
+
             return View(submission_Model);
         }
 
