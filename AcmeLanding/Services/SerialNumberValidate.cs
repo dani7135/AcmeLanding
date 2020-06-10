@@ -8,15 +8,15 @@ using System.Diagnostics;
 namespace AcmeLanding.Services
 {
     public class SerialNumberValidate : ISerialNumber {
-        private readonly DataAccess access;
+        private readonly DataAccess _data;
        // DataAccess access = new DataAccess();
-        public SerialNumberValidate(DataAccess serials)
+        public SerialNumberValidate(DataAccess access)
         {
-            access = serials;
+            _data = access;
         }
         public bool SerialNumberVali(int number)
         {
-            List<int> valid = access.GetSerialsNumbers();
+            List<int> valid = _data.GetSerialsNumbers();
             foreach (var item in valid)
             {
                 if (number == item)

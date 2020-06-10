@@ -7,16 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AcmeLanding.Data;
 using ClassLibrary;
+using AcmeLanding.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace AcmeLanding.Controllers
 {
     public class SubmissionsController : Controller
     {
         private readonly Data.Acme_CorporationContext _context;
+        private readonly IAgeValidate _age;
 
-        public SubmissionsController(Data.Acme_CorporationContext context)
+        public int Min { get;  set; }
+        public int Max { get;  set; }
+
+
+        //    private readonly SerialNumberValidate _serial;
+        //  private readonly AgeValidate _age;
+
+
+        public SubmissionsController(Data.Acme_CorporationContext context, SerialNumberValidate number, AgeValidate validate, IAgeValidate validatedAge)
         {
             _context = context;
+            /* _serial = number;
+             _age = validate;*/
+            _age = validatedAge;
         }
 
         // GET: Submissions
@@ -56,12 +70,37 @@ namespace AcmeLanding.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Age,FirstName,LastName,Email,SerialNumber")] Submission_Model submission_Model)
         {
+            //var ages = _age.IsValid(access);
+           
+
             if (ModelState.IsValid)
             {
+                bool ageVail = _age.IsValid(Min, Max);
+                if (ageVail == false)
+                {
+                                        return RedirectToAction(nameof(Create));
+
+                }
+
+                /*   var v = _serial.SerialNumberVali(number);
+                if (v == false)
+                {
+                    return RedirectToAction(nameof(Create));
+
+                    //ModelState.AddModelError(string.Empty, "This code is not valid");
+
+                }
+                //   ValidationResult ages = age.IsValid(submission_Model);
+                /* if (ages == false)
+                 {
+                 }*/
+
+
                 _context.Add(submission_Model);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(submission_Model);
         }
 

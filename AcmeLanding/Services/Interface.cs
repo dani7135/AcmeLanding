@@ -12,9 +12,9 @@ namespace AcmeLanding.Services
     {
         bool SerialNumberVali(int number);
     }
-    public interface IAge
+    public interface IAgeValidate
     {
-        bool IsValid(int value);
-        string FormatErrorMessage(string name);
+        bool IsValid(int Min, int Max);
+      //  string FormatErrorMessage(string name);
     }
 }
