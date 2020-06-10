@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using AcmeLanding.Data;
 using ClassLibrary;
 using AcmeLanding.Services;
-using System.ComponentModel.DataAnnotations;
 
 namespace AcmeLanding.Controllers
 {
@@ -72,15 +71,15 @@ namespace AcmeLanding.Controllers
         public async Task<IActionResult> Create([Bind("Id,Age,FirstName,LastName,Email,SerialNumber")] Submission_Model submission_Model)
         {
             //var ages = _age.IsValid(access);
-           
+            bool ageVail = _age.IsValid(age.Min, age.Max);
+            if (ageVail == false)
+            {
+                return RedirectToAction(nameof(Create));
+            }
 
             if (ModelState.IsValid)
             {
-                bool ageVail = _age.IsValid(age.Min, age.Max);
-                if (ageVail == false)
-                {  
-                    return RedirectToAction(nameof(Create));
-                }
+               
 
                 /*   var v = _serial.SerialNumberVali(number);
                 if (v == false)
@@ -190,3 +189,4 @@ namespace AcmeLanding.Controllers
         }
     }
 }
+

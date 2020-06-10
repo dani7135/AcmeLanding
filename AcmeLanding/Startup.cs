@@ -43,7 +43,7 @@ namespace AcmeLanding
 
             //  services.AddScoped<ISerialNumber, SerialNumberValidate>();
             services.AddTransient<Submission_Model>();
-            services.AddSingleton<IAgeValidate, AgeValidate>();
+            services.AddScoped<IAgeValidate, AgeValidate>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
