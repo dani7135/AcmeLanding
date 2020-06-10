@@ -30,7 +30,7 @@ namespace AcmeLanding.Controllers
             _context = context;
             /* _serial = number;
              _age = validate;*/
-            _age = validatedAge;
+          //  _age = validatedAge; Tæt på denne virker
         }
 
         // GET: Submissions
@@ -75,7 +75,8 @@ namespace AcmeLanding.Controllers
 
             if (ModelState.IsValid)
             {
-                bool ageVail = _age.IsValid(Min, Max);
+                //Tæt på den øvserte bool virker.
+                /*bool ageVail = _age.IsValid(Min, Max);
                 if (ageVail == false)
                 {  
                     return RedirectToAction(nameof(Create));

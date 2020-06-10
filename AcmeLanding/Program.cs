@@ -12,7 +12,11 @@ namespace AcmeLanding
     {
         public static async Task Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            //Det gamle
+            CreateHostBuilder(args).Build().Run();
+
+            /* DEt ændret
+            *var host = CreateHostBuilder(args).Build();
 
             using (var serviceScope = host.Services.CreateScope())
             {
@@ -27,7 +31,7 @@ namespace AcmeLanding
                     logger.LogError(ex, "An error occurred.");
                 }
             }
-            await host.RunAsync();
+            await host.RunAsync();*/
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
