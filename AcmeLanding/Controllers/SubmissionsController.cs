@@ -16,13 +16,14 @@ namespace AcmeLanding.Controllers
     {
         private readonly Data.Acme_CorporationContext _context;
         private readonly IAgeValidate _age;
-
-        public int Min { get;  set; }
-        public int Max { get;  set; }
+        static DataAccess da;
+        
+       
 
 
         //    private readonly SerialNumberValidate _serial;
-        //  private readonly AgeValidate _age;
+        AgeValidate age = new AgeValidate(da);
+        
 
 
         public SubmissionsController(Data.Acme_CorporationContext context, SerialNumberValidate number, AgeValidate validate, IAgeValidate validatedAge)
@@ -75,7 +76,7 @@ namespace AcmeLanding.Controllers
 
             if (ModelState.IsValid)
             {
-                bool ageVail = _age.IsValid(Min, Max);
+                bool ageVail = _age.IsValid(age.Min, age.Max);
                 if (ageVail == false)
                 {  
                     return RedirectToAction(nameof(Create));

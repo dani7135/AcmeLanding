@@ -32,9 +32,8 @@ namespace AcmeLanding
             services.AddDbContext<Data.Acme_CorporationContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("Acme_CorporationContext")));
+           
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            
-                
                 //   .AddRoleStore<IdentityRole>()
                 .AddEntityFrameworkStores<Data.Acme_CorporationContext>();
            
