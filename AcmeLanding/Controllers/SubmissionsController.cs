@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AcmeLanding.Data;
 using ClassLibrary;
+using AcmeLanding.Services;
 
 namespace AcmeLanding.Controllers
 {
     public class SubmissionsController : Controller
     {
         private readonly Data.Acme_CorporationContext _context;
+        private readonly IAgeValidate _age;
 
-        public SubmissionsController(Data.Acme_CorporationContext context)
+        public SubmissionsController(Data.Acme_CorporationContext context, IAgeValidate validatedAge)
         {
             _context = context;
+             _age = validatedAge;
         }
 
         // GET: Submissions
@@ -56,6 +59,13 @@ namespace AcmeLanding.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Age,FirstName,LastName,Email,SerialNumber")] Submission_Model submission_Model)
         {
+            bool ageVail = _age.IsValid(submission_Model.Age);
+            if (ageVail == false)
+            {
+                ModelState.AddModelError(string.Empty, "This age is not valid. You have to be older then 18");
+            }
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(submission_Model);
