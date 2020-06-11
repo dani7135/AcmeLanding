@@ -16,4 +16,8 @@ namespace AcmeLanding.Services
     {
         bool IsValid(int age);
     }
+    public interface IDraw
+    {
+        bool WinnerOrNot(int number);
+    }
 }

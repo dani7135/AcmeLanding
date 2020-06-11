@@ -35,5 +35,11 @@ namespace ClassLibrary
             return serialNumberValidate;
 
         }
+        
+    /*    public List<Submission_Model>GetSubmissions()
+        {
+            return Acme_.Submission_Model.ToList();
+        }
+       */ 
     }
 }

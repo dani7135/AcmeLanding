@@ -15,11 +15,13 @@ namespace AcmeLanding.Controllers
     {
         private readonly Data.Acme_CorporationContext _context;
         private readonly IAgeValidate _age;
+        private readonly IDraw _draw;
 
-        public SubmissionsController(Data.Acme_CorporationContext context, IAgeValidate validatedAge)
+        public SubmissionsController(Data.Acme_CorporationContext context, IAgeValidate validatedAge, IDraw draw)
         {
             _context = context;
              _age = validatedAge;
+            _draw = draw;
         }
 
         // GET: Submissions
@@ -57,20 +59,25 @@ namespace AcmeLanding.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Age,FirstName,LastName,Email,SerialNumber")] Submission_Model submission_Model)
+        public async Task<IActionResult> Create([Bind("Id,Age,FirstName,LastName,Email,SerialNumber,Winner")] Submission_Model submission_Model)
         {
             bool ageVail = _age.IsValid(submission_Model.Age);
+            bool drawWinner = _draw.WinnerOrNot(submission_Model.Winner);
             if (ageVail == false)
             {
                 ModelState.AddModelError(string.Empty, "This age is not valid. You have to be older then 18");
             }
-
+           
 
             if (ModelState.IsValid)
             {
                 _context.Add(submission_Model);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            if (drawWinner == true)
+            {
+                
             }
             return View(submission_Model);
         }
@@ -96,7 +103,7 @@ namespace AcmeLanding.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Age,FirstName,LastName,Email,SerialNumber")] Submission_Model submission_Model)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Age,FirstName,LastName,Email,SerialNumber,Winner")] Submission_Model submission_Model)
         {
             if (id != submission_Model.Id)
             {
