@@ -14,7 +14,6 @@ namespace AcmeLanding.Services
     }
     public interface IAgeValidate
     {
-        bool IsValid(int Min, int Max);
-      //  string FormatErrorMessage(string name);
+        bool IsValid(int age);
     }
 }

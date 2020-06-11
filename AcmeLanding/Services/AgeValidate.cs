@@ -15,12 +15,11 @@ namespace AcmeLanding.Services
         public int Min { get; }
         public int Max { get; }
 
-        public bool IsValid(int Min, int Max)
+        public bool IsValid(int age)
         {
-
-            if (Min < 18 || Max > 102)
+            if (age < 18)
             {
-                 return false;
+                return false;
 
             }
             return true;
