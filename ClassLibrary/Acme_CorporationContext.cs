@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ClassLibrary
 {
@@ -11,4 +8,3 @@ namespace ClassLibrary
         public DbSet<Acme_CorporationContext> Submission_Model { get; set; }
     }
 }
-  

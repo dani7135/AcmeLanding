@@ -1,15 +1,13 @@
-﻿using System;
+﻿using ClassLibrary;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ClassLibrary;
 using System.Diagnostics;
 
 namespace AcmeLanding.Services
 {
-    public class SerialNumberValidate : ISerialNumber {
+    public class SerialNumberValidate : ISerialNumber
+    {
         private readonly DataAccess _data;
-       // DataAccess access = new DataAccess();
+        // DataAccess access = new DataAccess();
         public SerialNumberValidate(DataAccess access)
         {
             _data = access;
@@ -30,6 +28,6 @@ namespace AcmeLanding.Services
 
             return false;
         }
-    } 
+    }
 }
 

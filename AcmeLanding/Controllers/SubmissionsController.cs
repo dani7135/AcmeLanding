@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AcmeLanding.Services;
+using ClassLibrary;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AcmeLanding.Data;
-using ClassLibrary;
-using AcmeLanding.Services;
 
 namespace AcmeLanding.Controllers
 {
@@ -20,7 +16,7 @@ namespace AcmeLanding.Controllers
         public SubmissionsController(Data.Acme_CorporationContext context, IAgeValidate validatedAge, IDraw draw)
         {
             _context = context;
-             _age = validatedAge;
+            _age = validatedAge;
             _draw = draw;
         }
 
@@ -67,7 +63,7 @@ namespace AcmeLanding.Controllers
             {
                 ModelState.AddModelError(string.Empty, "This age is not valid. You have to be older then 18");
             }
-           
+
 
             if (ModelState.IsValid)
             {
@@ -77,7 +73,7 @@ namespace AcmeLanding.Controllers
             }
             if (drawWinner == true)
             {
-                
+
             }
             return View(submission_Model);
         }

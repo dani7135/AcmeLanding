@@ -1,5 +1,3 @@
-using System;
-
 namespace AcmeLanding.Models
 {
     public class ErrorViewModel

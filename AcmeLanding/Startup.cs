@@ -1,19 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AcmeLanding.Services;
+using ClassLibrary;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using AcmeLanding.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ClassLibrary;
-using AcmeLanding.Services;
 
 namespace AcmeLanding
 {
@@ -33,12 +26,12 @@ namespace AcmeLanding
                 options.UseSqlServer(
                     Configuration.GetConnectionString("Acme_CorporationContext")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            
-                
+
+
                 //   .AddRoleStore<IdentityRole>()
                 .AddEntityFrameworkStores<Data.Acme_CorporationContext>();
-           
-            
+
+
             services.AddRazorPages();
             services.AddControllersWithViews();
 
@@ -55,7 +48,7 @@ namespace AcmeLanding
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-            } 
+            }
             else
             {
                 app.UseExceptionHandler("/Home/Error");

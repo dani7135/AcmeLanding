@@ -1,18 +1,18 @@
-using System;
-using System.Threading.Tasks;
 using ClassLibrary;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace AcmeLanding
 {
-    public class Program 
+    public class Program
     {
         public static async Task Main(string[] args)
         {
-           
+
             var host = CreateHostBuilder(args).Build();
 
             using (var serviceScope = host.Services.CreateScope())
@@ -22,7 +22,7 @@ namespace AcmeLanding
                 {
                     var serviceContext = services.GetRequiredService<Acme_CorporationContext>();
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred.");
