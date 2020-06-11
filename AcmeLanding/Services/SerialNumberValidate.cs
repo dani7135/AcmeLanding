@@ -8,12 +8,10 @@ using System.Diagnostics;
 namespace AcmeLanding.Services
 {
     public class SerialNumberValidate : ISerialNumber {
-        private readonly DataAccess _data;
-       // DataAccess access = new DataAccess();
-        public SerialNumberValidate(DataAccess access)
-        {
-            _data = access;
-        }
+        private  readonly ClassLibrary.Acme_CorporationContext _context;
+      //  DataAccess access = new DataAccess(_context);
+       private readonly DataAccess _data;
+      
         public bool SerialNumberVali(int number)
         {
             List<int> valid = _data.GetSerialsNumbers();
@@ -21,12 +19,10 @@ namespace AcmeLanding.Services
             {
                 if (number == item)
                 {
-                    Debug.WriteLine("Det virker");
 
                     return true;
                 }
             }
-            Debug.WriteLine("Det virker ikke");
 
             return false;
         }

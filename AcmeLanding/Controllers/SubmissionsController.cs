@@ -1,34 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AcmeLanding.Services;
+using ClassLibrary;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AcmeLanding.Data;
-using ClassLibrary;
-using AcmeLanding.Services;
 
 namespace AcmeLanding.Controllers
 {
     public class SubmissionsController : Controller
     {
         private readonly Data.Acme_CorporationContext _context;
+        private readonly ISerialNumber _serial;
         private readonly IAgeValidate _age;
-        
-       
 
 
-        //    private readonly SerialNumberValidate _serial;
         AgeValidate age = new AgeValidate();
-        
 
 
-        public SubmissionsController(Data.Acme_CorporationContext context, IAgeValidate validatedAge)
+
+        public SubmissionsController(Data.Acme_CorporationContext context, ISerialNumber number, IAgeValidate validatedAge)
         {
             _context = context;
-            /* _serial = number;
-             _age = validate;*/
+            _serial = number;
             _age = validatedAge;
         }
 
@@ -69,32 +62,28 @@ namespace AcmeLanding.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Age,FirstName,LastName,Email,SerialNumber")] Submission_Model submission_Model)
         {
-            //var ages = _age.IsValid(access);
-            bool ageVail = _age.IsValid(submission_Model.Age);
+            bool ageVail =  _age.IsValid(submission_Model.Age);
+            var v = _serial.SerialNumberVali(submission_Model.SerialNumber);
+
+
             if (ageVail == false)
             {
                 ModelState.AddModelError(string.Empty, "This age is not valid. You have to be older then 18");
             }
 
+            if (v == true)
+            {
+                ModelState.AddModelError(string.Empty, "This code is not valid");
+
+            }
             if (ModelState.IsValid)
             {
-               
-
-                /*   var v = _serial.SerialNumberVali(number);
-                if (v == false)
-                {
-                    return RedirectToAction(nameof(Create));
-
-                    //ModelState.AddModelError(string.Empty, "This code is not valid");
-
-             }*/
-
 
                 _context.Add(submission_Model);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-                }
-            
+            }
+
 
             return View(submission_Model);
         }

@@ -29,21 +29,22 @@ namespace AcmeLanding
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Data.Acme_CorporationContext>(options =>
+            services.AddDbContext<ClassLibrary.Acme_CorporationContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("Acme_CorporationContext")));
            
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 //   .AddRoleStore<IdentityRole>()
-                .AddEntityFrameworkStores<Data.Acme_CorporationContext>();
+                .AddEntityFrameworkStores<ClassLibrary.Acme_CorporationContext>();
            
             
             services.AddRazorPages();
             services.AddControllersWithViews();
 
-            //  services.AddScoped<ISerialNumber, SerialNumberValidate>();
+            services.AddScoped<ISerialNumber, SerialNumberValidate>();
             services.AddTransient<Submission_Model>();
             services.AddScoped<IAgeValidate, AgeValidate>();
+            services.AddScoped<DataAccess>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
